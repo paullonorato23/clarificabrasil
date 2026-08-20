@@ -52,7 +52,7 @@ Deploy:    (a definir — Vercel + Railway/Render sugeridos)
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/seu-usuario/politica-transparente.git
+git clone https://github.com/paullonorato23/politica-transparente.git
 cd politica-transparente
 ```
 
@@ -86,7 +86,7 @@ Adoramos contribuições! Seja código, design, dados, revisão de promessas ou 
 Leia nosso [CONTRIBUTING.md](CONTRIBUTING.md) para o passo a passo completo.
 
 Formas rápidas de ajudar:
-- 🐛 Reporte bugs em [Issues](https://github.com/seu-usuario/politica-transparente/issues)
+- 🐛 Reporte bugs em [Issues](https://github.com/paullonorato23/politica-transparente/issues)
 - 💡 Sugira funcionalidades
 - 📝 Cadastre e verifique promessas de campanha
 - 🔍 Revise pull requests
