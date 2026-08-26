@@ -150,3 +150,51 @@ def test_promessa_ja_moderada_sai_da_fila(client, db, parlamentar, token_usuario
     assert client.post(
         f"/moderacao/promessas/{promessa.id}/validar", headers=auth_header(token)
     ).status_code == 404
+
+
+def test_moderador_nao_modera_o_proprio_envio(
+    client, db, parlamentar, moderador, token_moderador
+):
+    """Nem moderadores podem aprovar/rejeitar promessas que eles mesmos enviaram."""
+    promessa = nova_promessa(db, parlamentar.id, moderador.id)
+
+    assert client.post(
+        f"/moderacao/promessas/{promessa.id}/aprovar", headers=auth_header(token_moderador)
+    ).status_code == 403
+    assert client.post(
+        f"/moderacao/promessas/{promessa.id}/rejeitar",
+        json={"motivo": "qualquer"},
+        headers=auth_header(token_moderador),
+    ).status_code == 403
+
+    db.refresh(promessa)
+    assert promessa.situacao == SituacaoModeracao.PENDENTE
+
+
+def test_outro_moderador_consegue_moderar(client, db, parlamentar, moderador, token_moderador):
+    """A promessa de um moderador pode ser moderada por OUTRO moderador."""
+    from app.enums import PapelUsuario
+    from app.security import hash_senha
+
+    outro = Usuario(
+        nome="Moderador 2",
+        email="mod2@teste.org",
+        senha_hash=hash_senha("senha-segura"),
+        papel=PapelUsuario.MODERADOR,
+    )
+    db.add(outro)
+    db.commit()
+
+    promessa = nova_promessa(db, parlamentar.id, moderador.id)
+
+    resp_login = client.post(
+        "/auth/login", json={"email": "mod2@teste.org", "senha": "senha-segura"}
+    )
+    token_mod2 = resp_login.json()["accessToken"]
+
+    resp = client.post(
+        f"/moderacao/promessas/{promessa.id}/aprovar", headers=auth_header(token_mod2)
+    )
+    assert resp.status_code == 200
+    db.refresh(promessa)
+    assert promessa.situacao == SituacaoModeracao.PUBLICADA
