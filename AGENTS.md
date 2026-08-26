@@ -30,23 +30,25 @@ Funcionalidades planejadas (ver `README.md`):
 
 ## 2. Estado atual do repositório — LEIA ANTES DE AGIR
 
-⚠️ **O repositório ainda está em fase pré-implementação.** Ele contém **apenas documentação**:
+O repositório já tem código-fonte em duas frentes:
 
 ```
 .
-├── README.md         # Visão geral, stack planejada, instruções de setup
-├── CONTRIBUTING.md   # Guia de contribuição, convenções, fluxo de PRs
-├── LICENSE           # MIT
-└── AGENTS.md         # Este arquivo
+├── backend/    # API FastAPI + SQLAlchemy (modelos, auth JWT, moderação, score, testes pytest)
+├── frontend/   # Next.js 16 + React 19 + Tailwind 4 (MVP navegável com dados mock)
+├── Docs/       # Documentação viva: Doubts.md, Technical-Debts.md, CHANGELOG.md, Status.md
+├── PENDENCIAS.md  # Plano original (não editar; o acompanhamento vivo é Docs/Status.md)
+├── README.md   # Visão geral, stack, instruções de setup
+├── CONTRIBUTING.md / LICENSE / DESIGN_SYSTEM.md
+└── AGENTS.md   # Este arquivo
 ```
-
-**Não existe código-fonte ainda**: não há `pyproject.toml`, `package.json`, `Cargo.toml`, `requirements.txt`, diretórios `backend/` ou `frontend/`, testes, CI/CD ou qualquer configuração de build.
 
 Consequências práticas para agentes:
 
-- Os comandos de build/test descritos abaixo são **planejados** (extraídos do README/CONTRIBUTING), mas **ainda não funcionarão** — as pastas e arquivos referenciados não existem.
-- Ao implementar algo novo, você estará **criando a estrutura do zero**. Siga a arquitetura planejada abaixo, a menos que o usuário peça outra coisa.
 - **Não invente** módulos, testes ou convenções "existentes" — confira sempre se o arquivo/diretório realmente existe antes de afirmar que algo é padrão do projeto.
+- O frontend ainda consome `frontend/src/data/mock.ts`; a migração para a API real é pendência (ver `Docs/Status.md`).
+- Documentação viva do projeto fica em `Docs/`: dúvidas em `Doubts.md`, débitos em `Technical-Debts.md`, histórico em `CHANGELOG.md`, acompanhamento em `Status.md`. Atualize-os ao implementar.
+- O frontend tem seu próprio guia em `frontend/AGENTS.md`.
 
 ## 3. Stack e arquitetura planejadas
 
@@ -69,31 +71,30 @@ frontend/   # Next.js (Node.js 18+), npm run dev na porta 3000
 
 Ambos usam arquivos `.env.example` como modelo de configuração (`backend/.env`, `frontend/.env.local`).
 
-## 4. Comandos de build, execução e teste (planejados)
+## 4. Comandos de build, execução e teste
 
-### Backend (quando existir)
+### Backend (`backend/`)
 
 ```bash
 cd backend
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env      # editar com credenciais do PostgreSQL
+pip install -r requirements-dev.txt
+cp .env.example .env      # opcional em dev: sem DATABASE_URL usa SQLite
 uvicorn main:app --reload
 ```
 
-Testes do backend: `pytest`.
+Testes do backend: `pytest` (SQLite em memória, sem rede nem PostgreSQL).
 
-### Frontend (quando existir)
+### Frontend (`frontend/`)
 
 ```bash
 cd frontend
 npm install
-cp .env.example .env.local
 npm run dev               # http://localhost:3000
 ```
 
-Testes do frontend: `npm test`.
+Testes do frontend: `npm test` (**ainda não configurado** — sem framework de testes instalado).
 
 ### Pré-requisitos de ambiente
 
@@ -143,14 +144,12 @@ Tipos: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
 
 ### Estilo de código
 
-- "Siga o estilo de código existente" (CONTRIBUTING.md). Como ainda não há código, ao criar os primeiros arquivos use as convenções idiomáticas da stack escolhida (PEP 8 para Python/FastAPI; convenções do Next.js/React para o frontend) e mantenha consistência daí em diante.
+- "Siga o estilo de código existente" (CONTRIBUTING.md): PEP 8 no backend (identificadores e docstrings em pt-BR), convenções do Next.js/React no frontend. Mantenha consistência daí em diante.
 
 ## 6. Estratégia de testes
 
-Não há infraestrutura de testes ainda. As expectativas documentadas são:
-
-- Backend: `pytest`
-- Frontend: `npm test`
+- Backend: `pytest` em `backend/tests/` (45 testes; SQLite em memória, sem rede).
+- Frontend: `npm test` (ainda não configurado).
 - "Adicione testes quando aplicável" (CONTRIBUTING.md) — ao implementar código novo, inclua testes correspondentes.
 
 ## 7. Considerações de segurança e dados
