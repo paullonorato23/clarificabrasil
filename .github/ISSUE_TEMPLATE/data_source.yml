@@ -1,0 +1,48 @@
+name: Propor fonte ou correção de dados
+description: Sugira uma fonte oficial, integração ou correção em dados políticos.
+title: "[Dados]: "
+labels:
+  - enhancement
+body:
+  - type: dropdown
+    id: request_type
+    attributes:
+      label: Tipo de solicitação
+      options:
+        - Nova fonte oficial
+        - Correção de dado
+        - Integração ou importação
+        - Qualidade ou atualização de dados
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Fonte oficial
+      description: Informe a URL pública da fonte primária.
+      placeholder: https://...
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição e evidências
+      description: Explique o dado esperado, o observado e como validar a informação.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto
+      description: Quais telas, métricas ou análises podem ser afetadas?
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: A fonte é pública, verificável e preferencialmente oficial.
+          required: true
+        - label: Não incluí dados pessoais sensíveis nem informações de menores.
+          required: true

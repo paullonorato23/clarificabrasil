@@ -4,6 +4,16 @@
 
 Plataforma colaborativa e sem fins lucrativos para monitorar a atuação de deputados federais e senadores brasileiros durante seus mandatos. Cruzamos promessas de campanha com proposições, votações e gastos — tudo com dados oficiais e código aberto.
 
+## 🗺️ Roadmap público
+
+O desenvolvimento é organizado no [GitHub Project do Política Transparente](https://github.com/users/paullonorato23/projects/1). Qualquer pessoa pode acompanhar prioridades e andamento sem precisar entrar em uma ferramenta externa.
+
+- **Now** — trabalho priorizado e em execução
+- **Next** — próximo conjunto de entregas
+- **Later** — ideias válidas que ainda não foram priorizadas
+
+Consulte as views **Roadmap**, **Backlog**, **Current** e **Contributors**. Para começar a contribuir, procure itens com as labels [`good first issue`](https://github.com/paullonorato23/politicatransparente/labels/good%20first%20issue) e [`help wanted`](https://github.com/paullonorato23/politicatransparente/labels/help%20wanted).
+
 ---
 
 ## ✨ O que faz
@@ -52,8 +62,8 @@ Deploy:    (a definir — Vercel + Railway/Render sugeridos)
 
 ### 1. Clone o repositório
 ```bash
-git clone https://github.com/paullonorato23/politica-transparente.git
-cd politica-transparente
+git clone https://github.com/paullonorato23/politicatransparente.git
+cd politicatransparente
 ```
 
 ### 2. Backend
@@ -86,7 +96,8 @@ Adoramos contribuições! Seja código, design, dados, revisão de promessas ou 
 Leia nosso [CONTRIBUTING.md](CONTRIBUTING.md) para o passo a passo completo.
 
 Formas rápidas de ajudar:
-- 🐛 Reporte bugs em [Issues](https://github.com/paullonorato23/politica-transparente/issues)
+- 🗺️ Escolha uma tarefa no [roadmap público](https://github.com/users/paullonorato23/projects/1)
+- 🐛 Reporte bugs em [Issues](https://github.com/paullonorato23/politicatransparente/issues)
 - 💡 Sugira funcionalidades
 - 📝 Cadastre e verifique promessas de campanha
 - 🔍 Revise pull requests

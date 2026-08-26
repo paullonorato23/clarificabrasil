@@ -1,0 +1,54 @@
+name: Sugerir uma funcionalidade
+description: Proponha uma melhoria com problema, impacto e critérios claros.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ideias ainda abertas ou exploratórias funcionam melhor em Discussions. Use esta Issue quando já houver um problema claro a resolver.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema
+      description: Que necessidade de usuário ou do projeto esta proposta resolve?
+      placeholder: Hoje, pessoas que... não conseguem... porque...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solução proposta
+      description: Descreva o resultado desejado, sem limitar prematuramente a implementação.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternativas consideradas
+      description: Que outras abordagens ou soluções temporárias você avaliou?
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Critérios de aceite
+      description: Como saberemos que a funcionalidade está pronta?
+      placeholder: |
+        - [ ] Usuário consegue...
+        - [ ] Erros são exibidos...
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Contexto adicional
+      description: Inclua mockups, referências ou dependências conhecidas.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: Consultei o roadmap e as Issues existentes.
+          required: true
+        - label: Esta proposta é apartidária e alinhada à missão de transparência do projeto.
+          required: true

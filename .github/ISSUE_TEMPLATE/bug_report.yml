@@ -1,0 +1,56 @@
+name: Reportar um bug
+description: Informe um problema reproduzível no Política Transparente.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Obrigado por ajudar a melhorar o projeto. Antes de continuar, pesquise as Issues existentes para evitar duplicatas.
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrição
+      description: O que aconteceu?
+      placeholder: Descreva o problema de forma objetiva.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Passos para reproduzir
+      description: Liste o menor conjunto de passos que demonstra o problema.
+      placeholder: |
+        1. Acesse...
+        2. Clique em...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamento esperado
+      description: O que deveria ter acontecido?
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Ambiente
+      description: Informe navegador, sistema operacional e dispositivo, quando aplicável.
+      placeholder: "Ex.: Chrome 128, macOS 15, desktop"
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidências e contexto adicional
+      description: Adicione logs sem dados sensíveis, screenshots ou outras informações úteis.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verificações
+      options:
+        - label: Pesquisei as Issues existentes e não encontrei uma duplicata.
+          required: true
+        - label: Removi dados pessoais, credenciais e outras informações sensíveis.
+          required: true

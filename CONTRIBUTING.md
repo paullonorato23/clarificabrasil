@@ -30,6 +30,14 @@ Nosso projeto se compromete a proporcionar uma experiência livre de assédio pa
 
 ## 💡 Como posso contribuir?
 
+Antes de começar, consulte o [roadmap público](https://github.com/users/paullonorato23/projects/1) e pesquise as Issues abertas. Os status significam:
+
+- **Now**: trabalho priorizado e em execução
+- **Next**: próximo conjunto de entregas
+- **Later**: ideias aceitas, ainda sem compromisso de prazo
+
+Se você está chegando agora, comece pelas labels [`good first issue`](https://github.com/paullonorato23/politicatransparente/labels/good%20first%20issue) e [`help wanted`](https://github.com/paullonorato23/politicatransparente/labels/help%20wanted). Comente na Issue antes de iniciar para evitar trabalho duplicado.
+
 ### Não sabe programar? Sem problema!
 
 | Área | Como ajudar |
@@ -45,7 +53,7 @@ Nosso projeto se compromete a proporcionar uma experiência livre de assédio pa
 
 ## 🐛 Reportando Bugs
 
-Encontrou algo errado? Abra uma [Issue](https://github.com/paullonorato23/politica-transparente/issues) com o template "Bug Report" e inclua:
+Encontrou algo errado? Abra uma [Issue](https://github.com/paullonorato23/politicatransparente/issues/new/choose) com o template "Bug Report" e inclua:
 
 1. **Descrição clara** do problema
 2. **Passos para reproduzir** (passo a passo)
@@ -60,7 +68,7 @@ Encontrou algo errado? Abra uma [Issue](https://github.com/paullonorato23/politi
 
 ## ✨ Sugerindo Funcionalidades
 
-Tem uma ideia? Abra uma Issue com o template "Feature Request":
+Tem uma ideia? Abra uma [Issue](https://github.com/paullonorato23/politicatransparente/issues/new/choose) com o template "Feature Request":
 
 1. **Qual problema** essa funcionalidade resolve?
 2. **Descrição da solução** proposta
@@ -73,8 +81,8 @@ Tem uma ideia? Abra uma Issue com o template "Feature Request":
 
 ### 1. Fork e clone
 ```bash
-git clone https://github.com/paullonorato23/politica-transparente.git
-cd politica-transparente
+git clone https://github.com/paullonorato23/politicatransparente.git
+cd politicatransparente
 ```
 
 ### 2. Crie uma branch
@@ -114,9 +122,11 @@ Abra um PR descrevendo:
 - Como testar
 - Issues relacionadas (use `Closes #123`)
 
+Pull Requests para `main` precisam de pelo menos uma aprovação de alguém com permissão de escrita no repositório. O autor não pode aprovar a própria PR. Revisões da comunidade são bem-vindas e ajudam a decisão, mesmo quando não contam para o requisito técnico de merge.
+
 ### Checklist do PR
 - [ ] Código compila/roda sem erros
-- [ ] Testes passam (`npm test` / `pytest`)
+- [ ] Verificações existentes passam (`npm run lint` e `npm run build` no frontend)
 - [ ] Não há `console.log` ou debug esquecido
 - [ ] Documentação atualizada
 - [ ] Commits organizados e descritivos

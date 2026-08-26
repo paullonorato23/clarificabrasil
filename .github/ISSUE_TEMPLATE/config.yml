@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ideias e perguntas abertas
+    url: https://github.com/paullonorato23/politicatransparente/discussions
+    about: Use Discussions para explorar ideias, tirar dúvidas e conversar antes de propor trabalho executável.
+  - name: Roadmap público
+    url: https://github.com/users/paullonorato23/projects/1
+    about: Veja o que está em Now, Next e Later antes de abrir uma nova Issue.
