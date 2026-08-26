@@ -122,7 +122,7 @@ Abra um PR descrevendo:
 - Como testar
 - Issues relacionadas (use `Closes #123`)
 
-Pull Requests para `main` precisam de pelo menos uma aprovação de alguém com permissão de escrita no repositório. O autor não pode aprovar a própria PR. Revisões da comunidade são bem-vindas e ajudam a decisão, mesmo quando não contam para o requisito técnico de merge.
+Como política de revisão, Pull Requests para `main` devem receber pelo menos uma aprovação de alguém com permissão de escrita no repositório. O autor não pode satisfazer a própria aprovação obrigatória. Revisões da comunidade são bem-vindas e ajudam a decisão, mesmo quando não contam para um requisito técnico de merge. A aplicação automática dessa política depende de configurar branch protection ou um ruleset com *required reviews*.
 
 ### Checklist do PR
 - [ ] Código compila/roda sem erros
