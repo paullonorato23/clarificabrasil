@@ -61,6 +61,14 @@ def _pendente_ou_404(db: Session, promessa_id: str) -> Promessa:
     return promessa
 
 
+def _impede_automoderacao(promessa: Promessa, moderador: Usuario) -> None:
+    """Ninguém modera o próprio envio — nem moderadores. Regra de defesa
+    contra manipulação: a decisão sobre uma promessa sempre passa por outra
+    pessoa (comunidade ou outro moderador)."""
+    if promessa.enviada_por_id == moderador.id:
+        raise HTTPException(403, "Você não pode moderar o próprio envio.")
+
+
 @router.get("/promessas", response_model=List[PromessaPendenteOut])
 def fila(
     db: Session = Depends(get_db),
@@ -131,6 +139,7 @@ def aprovar(
     moderador: Usuario = Depends(require_moderador),
 ):
     promessa = _pendente_ou_404(db, promessa_id)
+    _impede_automoderacao(promessa, moderador)
     promessa.situacao = SituacaoModeracao.PUBLICADA
     db.commit()
     db.refresh(promessa)
@@ -145,6 +154,7 @@ def rejeitar(
     moderador: Usuario = Depends(require_moderador),
 ):
     promessa = _pendente_ou_404(db, promessa_id)
+    _impede_automoderacao(promessa, moderador)
     promessa.situacao = SituacaoModeracao.REJEITADA
     promessa.motivo_rejeicao = dados.motivo
     db.commit()

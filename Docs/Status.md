@@ -35,8 +35,18 @@ Legenda: ✅ pronto · 🟡 parcial · ⬜ pendente
 - ✅ Fila de moderação com contagens e autor
 - ✅ Publicação após 3 validações da comunidade ou aprovação de moderador
 - ✅ Rejeição por moderador com motivo obrigatório
+- ✅ **Moderador não modera o próprio envio** (regra anti-manipulação, 25/08 tarde)
+- ⬜ **Visibilidade pública total da moderação** (pendentes e rejeitadas + motivo, sem login — decisão 8 em Docs/Doubts.md; muda comportamento atual da API e pede UX por abas)
+- ⬜ **Snapshot da fonte via Wayback Machine** + campo de citação literal (decisão 10)
 - ⬜ Revalidação periódica de links de fontes já publicadas
-- ⬜ Notificação ao autor quando a promessa é publicada/rejeitada (depende de e-mail)
+- ⬜ Notificação ao autor quando a promessa é publicada/rejeitada (depende de e-mail — Resend escolhido como provedor)
+
+### Anti-abuso (PRIORIDADE 0 — decidido em 25/08)
+- ⬜ Verificação de e-mail no registro (conta só ativa após confirmar)
+- ⬜ Captcha (Cloudflare Turnstile) em registro, login e cadastro de promessa
+- ⬜ Rate limiting por IP/usuário (registro, login, promessas, validações)
+- ⬜ **Reputação progressiva** com limites por conta nova → contas maduras (decisão 11; regra deve ser pública no site)
+- ⬜ Backoffice de moderação: fila por risco, banimento de contas, auditoria
 
 ### Parlamentares e ranking
 - ✅ Listagem com filtros, detalhe completo, ranking por acessos/score
