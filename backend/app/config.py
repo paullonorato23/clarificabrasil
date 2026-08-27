@@ -20,6 +20,10 @@ class Settings(BaseSettings):
     admin_email: Optional[str] = None
     admin_senha: Optional[str] = None
 
+    # Integração com a API de Dados Abertos da Câmara (issue #8).
+    camara_api_url: str = "https://dadosabertos.camara.leg.br/api/v2"
+    camara_http_timeout: float = 10.0
+
     @property
     def cors_origins_list(self) -> List[str]:
         return [origem.strip() for origem in self.cors_origins.split(",") if origem.strip()]

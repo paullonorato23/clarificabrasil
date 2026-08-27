@@ -73,7 +73,7 @@ class ProposicaoOut(SchemaBase):
     tipo: TipoProposicao
     numero: str
     ementa: str
-    tema: Tema
+    tema: Optional[Tema] = None
     status: StatusProposicao
     data: date
 
@@ -81,10 +81,10 @@ class ProposicaoOut(SchemaBase):
 class VotacaoOut(SchemaBase):
     id: str
     materia: str
-    tema: Tema
+    tema: Optional[Tema] = None
     data: date
     voto: VotoNominal
-    coerente_com_discurso: bool
+    coerente_com_discurso: Optional[bool] = None
 
 
 class GastoOut(SchemaBase):
