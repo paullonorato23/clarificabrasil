@@ -10,6 +10,26 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), datas em A
 
 ## [Não lançado]
 
+### 2026-08-27 — Integração com a API da Câmara (issue #8)
+
+- **Cliente HTTP** (`backend/app/integracoes/camara.py`): paginação automática,
+  endpoints de deputados, legislaturas, proposições, votações, votos nominais
+  e despesas de gabinete; timeout e URL configuráveis por env
+  (`CAMARA_API_URL`, `CAMARA_HTTP_TIMEOUT`); suporta `MockTransport` nos testes.
+- **Sincronização idempotente** (`backend/app/integracoes/sincronizacao.py`):
+  deputados → `Parlamentar` (slug único, mandato da legislatura atual),
+  proposições (PL/PEC/REQ), votos nominais recentes e despesas agregadas por
+  categoria/ano. CLI: `python -m app.integracoes.sincronizacao --etapa ...`.
+- **Modelo**: novos campos `id_camara` (Parlamentar, Proposicao, Votacao) para
+  upsert sem duplicar; `tema` de Proposicao/Votacao e `coerente_com_discurso`
+  de Votacao passaram a ser opcionais (decisões 13–15 em `Docs/Doubts.md`).
+- **Score v0.1 — esclarecimento**: votos sem avaliação editorial (`None`) são
+  ignorados no cálculo; se nenhum voto foi avaliado, as promessas assumem
+  peso total.
+- **Testes**: 8 novos testes com HTTP 100% mockado (55 no total, todos
+  passando) + smoke test manual contra a API real da Câmara.
+- A agenda periódica desta sincronização é a issue #23.
+
 ### 2026-08-25 — Backend: implementação inicial (do zero)
 
 **Infraestrutura do backend (`backend/`)**

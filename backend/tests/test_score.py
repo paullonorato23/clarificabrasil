@@ -74,3 +74,13 @@ def test_percentual_votos_coerentes():
     assert percentual_votos_coerentes([]) == 0
     votacoes = [votacao(True), votacao(True), votacao(False)]
     assert percentual_votos_coerentes(votacoes) == 67
+
+
+def test_votos_nao_avaliados_sao_ignorados():
+    """Votos importados sem avaliação editorial (None) não entram no cálculo."""
+    # Só votos não avaliados → como se não houvesse votos: promessas assumem peso total.
+    assert calcular_score([promessa("cumprida")], [votacao(None)]) == 100
+    # Mistura: a média de votos considera apenas os avaliados (1/1 = 1.0).
+    assert calcular_score([promessa("contraditada")], [votacao(True), votacao(None)]) == 30
+    assert percentual_votos_coerentes([votacao(None), votacao(True)]) == 100
+    assert percentual_votos_coerentes([votacao(None)]) == 0

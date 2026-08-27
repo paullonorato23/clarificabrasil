@@ -50,6 +50,8 @@ class Parlamentar(Base):
 
     # Slug usado na URL do frontend (ex.: "ana-beatriz-ramos").
     id: Mapped[str] = mapped_column(String(120), primary_key=True)
+    # ID oficial na API da Câmara (None para senadores e registros manuais).
+    id_camara: Mapped[Optional[int]] = mapped_column(Integer, unique=True, nullable=True)
     nome: Mapped[str] = mapped_column(String(200), index=True)
     casa: Mapped[Casa] = mapped_column(_Enum(Casa))
     partido: Mapped[str] = mapped_column(String(20))
@@ -120,11 +122,14 @@ class Proposicao(Base):
     __tablename__ = "proposicoes"
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    # ID oficial na API da Câmara, para atualização idempotente.
+    id_camara: Mapped[Optional[int]] = mapped_column(Integer, unique=True, nullable=True)
     parlamentar_id: Mapped[str] = mapped_column(ForeignKey("parlamentares.id"), index=True)
     tipo: Mapped[TipoProposicao] = mapped_column(_Enum(TipoProposicao))
     numero: Mapped[str] = mapped_column(String(20))  # ex.: "1452/2023"
     ementa: Mapped[str] = mapped_column(Text)
-    tema: Mapped[Tema] = mapped_column(_Enum(Tema))
+    # Opcional: a categorização automática por tema é a issue #28.
+    tema: Mapped[Optional[Tema]] = mapped_column(_Enum(Tema), nullable=True)
     status: Mapped[StatusProposicao] = mapped_column(_Enum(StatusProposicao))
     data: Mapped[date] = mapped_column(Date)
 
@@ -133,14 +138,23 @@ class Proposicao(Base):
 
 class Votacao(Base):
     __tablename__ = "votacoes"
+    # Um registro por (votação oficial, parlamentar) — evita duplicar na ressincronização.
+    __table_args__ = (
+        UniqueConstraint("id_camara", "parlamentar_id", name="uq_votacao_parlamentar"),
+    )
 
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    # ID oficial da votação na API da Câmara (formato string, ex.: "2456789-123").
+    id_camara: Mapped[Optional[str]] = mapped_column(String(30), nullable=True)
     parlamentar_id: Mapped[str] = mapped_column(ForeignKey("parlamentares.id"), index=True)
     materia: Mapped[str] = mapped_column(String(300))
-    tema: Mapped[Tema] = mapped_column(_Enum(Tema))
+    # Opcional: a categorização automática por tema é a issue #28.
+    tema: Mapped[Optional[Tema]] = mapped_column(_Enum(Tema), nullable=True)
     data: Mapped[date] = mapped_column(Date)
     voto: Mapped[VotoNominal] = mapped_column(_Enum(VotoNominal))
-    coerente_com_discurso: Mapped[bool] = mapped_column(default=True)
+    # Opcional: dados importados não têm avaliação de coerência — ela é editorial.
+    # O Score ignora votos não avaliados (None).
+    coerente_com_discurso: Mapped[Optional[bool]] = mapped_column(nullable=True)
 
     parlamentar: Mapped[Parlamentar] = relationship(back_populates="votacoes")
 

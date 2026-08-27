@@ -61,9 +61,9 @@ Legenda: ✅ pronto · 🟡 parcial · ⬜ pendente
 - ⬜ 404/`loading.tsx`, `frontend/README.md`, `frontend/.env.example`, testes do frontend
 
 ## 3. Integração com fontes oficiais
-- ⬜ API Dados Abertos da Câmara (deputados, proposições, votações, despesas)
+- ✅ **API Dados Abertos da Câmara** (27/08): cliente HTTP + sincronização idempotente de deputados, proposições (PL/PEC/REQ), votos nominais e despesas; CLI `python -m app.integracoes.sincronizacao`. Testada com mock + smoke test real. Falta apenas agendar (issue #23)
 - ⬜ API do Senado Federal
-- ⬜ Base dos Dados (avaliação)
+- ✅ **Base dos Dados avaliada** (26/08): fonte **complementar** — backfill histórico e frequência em plenário; API da Câmara segue primária; Senado não é coberto pela BD. Ver `Docs/Base-dos-Dados.md`
 - ⬜ Job de sincronização periódica + cache
 
 ## 4. Inteligência (fase posterior)

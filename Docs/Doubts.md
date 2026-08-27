@@ -51,3 +51,27 @@ A fonte da verdade da v0.1 era o frontend (`frontend/src/lib/score.ts`).
 O backend portou a fórmula exata (`backend/app/score.py`) e passa a ser a
 fonte canônica quando o frontend migrar para dados reais. Versões futuras
 devem ser documentadas aqui e na rota `/metodologia`.
+
+*(Os itens 8–11 estão no PR #22 e o item 12 na branch `docs/avaliacao-base-dos-dados`, ambos aguardando merge.)*
+
+---
+
+## Integração Câmara (sessão de 27/08/2026)
+
+### 13. Tipos de proposição importados — decidido
+A Câmara tem dezenas de tipos (MPV, PLP, PDL, RIC...), mas o enum do frontend
+só conhece PL, PEC e REQ. **Decisão:** a sincronização importa apenas esses
+três tipos. Revisar quando o frontend suportar mais tipos.
+
+### 14. Tema de proposições e votações importadas — decidido
+A classificação temática da Câmara não corresponde aos nossos 8 temas.
+**Decisão:** `tema` fica **nulo** nos registros importados até a
+categorização automática (issue #28). O campo passou a ser opcional no modelo
+e nos schemas.
+
+### 15. Coerência e votos não efetivos — decidido
+- `coerente_com_discurso` é avaliação **editorial** — a API não a fornece.
+  Votos importados ficam com `None` e o Score v0.1 passou a **ignorar votos
+  não avaliados** (esclarecimento documentado em `app/score.py` e testado).
+- Tipos de voto da Câmara que não são Sim/Não/Abstenção ("Não votou",
+  "Obstrução", "Presente", "Branco"...) viram **Ausente** no nosso enum.

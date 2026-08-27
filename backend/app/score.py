@@ -7,6 +7,12 @@ fórmula deve ser documentada e versionada neste repositório.
 Cálculo: 70% vem das promessas de campanha e 30% das votações nominais.
 Se uma das fontes estiver vazia, a outra assume peso total.
 
+Esclarecimento da v0.1 (27/08/2026): votos importados das APIs oficiais ainda
+não têm avaliação editorial de coerência (`coerente_com_discurso = None`).
+Votos não avaliados são **ignorados** no cálculo — a média considera apenas
+votos avaliados (True/False). Se nenhum voto foi avaliado, as promessas
+assumem peso total.
+
 As funções aceitam qualquer objeto com os atributos esperados (modelos
 SQLAlchemy ou namespaces de teste); o status pode ser o enum ou a string.
 """
@@ -32,15 +38,21 @@ def _valor(obj) -> str:
     return getattr(obj, "value", obj)
 
 
+def _votos_avaliados(votacoes: Sequence) -> list:
+    """Votos com avaliação editorial de coerência (ignora os não avaliados)."""
+    return [v for v in votacoes if v.coerente_com_discurso is not None]
+
+
 def calcular_score(promessas: Sequence, votacoes: Sequence) -> int:
     media_promessas = (
         sum(PONTOS_POR_STATUS[_valor(p.status)] for p in promessas) / len(promessas)
         if promessas
         else None
     )
+    avaliados = _votos_avaliados(votacoes)
     media_votos = (
-        sum(1 for v in votacoes if v.coerente_com_discurso) / len(votacoes)
-        if votacoes
+        sum(1 for v in avaliados if v.coerente_com_discurso) / len(avaliados)
+        if avaliados
         else None
     )
 
@@ -70,8 +82,9 @@ def percentual_entrega(promessas: Sequence) -> int:
 
 
 def percentual_votos_coerentes(votacoes: Sequence) -> int:
-    """Percentual (0–100) de votos coerentes com o discurso de campanha."""
-    if not votacoes:
+    """Percentual (0–100) de votos coerentes entre os votos avaliados."""
+    avaliados = _votos_avaliados(votacoes)
+    if not avaliados:
         return 0
-    coerentes = sum(1 for v in votacoes if v.coerente_com_discurso)
-    return round(coerentes / len(votacoes) * 100)
+    coerentes = sum(1 for v in avaliados if v.coerente_com_discurso)
+    return round(coerentes / len(avaliados) * 100)
