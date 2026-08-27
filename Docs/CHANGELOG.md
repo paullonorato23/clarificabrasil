@@ -10,18 +10,15 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), datas em A
 
 ## [Não lançado]
 
-### 2026-08-25 (tarde) — Moderação: regra anti-automoderação
+### 2026-08-26 — Avaliação da Base dos Dados (issue #27)
 
-- **Moderador não pode aprovar nem rejeitar o próprio envio**: nova regra no
-  servidor (`_impede_automoderacao`, `backend/app/routers/moderacao.py`). A
-  promessa de um moderador só pode ser publicada/rejeitada pela comunidade ou
-  por outro moderador. Coberta por 2 novos testes (47 no total, todos passando).
-- Novas decisões registradas em `Docs/Doubts.md` (itens 8 a 11): visibilidade
-  pública total da moderação, snapshot da fonte via Wayback Machine,
-  reputação progressiva pública — todas pendentes de implementação e listadas
-  em `Docs/Status.md` (anti-abuso marcado como PRIORIDADE 0).
-- Provedores definidos pelo mantenedor: **Resend** (e-mails) e **Cloudflare
-  Turnstile** (captcha). Hospedagem ainda em aberto.
+- Pesquisa do conjunto `br_camara_dados_abertos` da Base dos Dados (tabelas,
+  cobertura histórica, modelo de acesso e custos) e verificação de que **não
+  há conjunto tratado do Senado** na BD.
+- Decisão documentada em `Docs/Base-dos-Dados.md`: BD como fonte
+  **complementar** (backfill histórico + frequência em plenário); API oficial
+  da Câmara segue primária; implementação entra nas issues #8 e #23.
+- `Docs/Status.md` e `Docs/Doubts.md` (item 12) atualizados.
 
 ### 2026-08-25 — Backend: implementação inicial (do zero)
 
