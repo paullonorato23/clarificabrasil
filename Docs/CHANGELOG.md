@@ -10,38 +10,15 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), datas em A
 
 ## [Não lançado]
 
-### 2026-08-27 — Integração com a API da Câmara (issue #8)
+### 2026-08-26 — Avaliação da Base dos Dados (issue #27)
 
-- **Cliente HTTP** (`backend/app/integracoes/camara.py`): paginação automática,
-  endpoints de deputados, legislaturas, proposições, votações, votos nominais
-  e despesas de gabinete; timeout e URL configuráveis por env
-  (`CAMARA_API_URL`, `CAMARA_HTTP_TIMEOUT`); suporta `MockTransport` nos testes.
-- **Sincronização idempotente** (`backend/app/integracoes/sincronizacao.py`):
-  deputados → `Parlamentar` (slug único, mandato da legislatura atual),
-  proposições (PL/PEC/REQ), votos nominais recentes e despesas agregadas por
-  categoria/ano. CLI: `python -m app.integracoes.sincronizacao --etapa ...`.
-- **Modelo**: novos campos `id_camara` (Parlamentar, Proposicao, Votacao) para
-  upsert sem duplicar; `tema` de Proposicao/Votacao e `coerente_com_discurso`
-  de Votacao passaram a ser opcionais (decisões 13–15 em `Docs/Doubts.md`).
-- **Score v0.1 — esclarecimento**: votos sem avaliação editorial (`None`) são
-  ignorados no cálculo; se nenhum voto foi avaliado, as promessas assumem
-  peso total.
-- **Testes**: 8 novos testes com HTTP 100% mockado (55 no total, todos
-  passando) + smoke test manual contra a API real da Câmara.
-- A agenda periódica desta sincronização é a issue #23.
-
-### 2026-08-25 (tarde) — Moderação: regra anti-automoderação
-
-- **Moderador não pode aprovar nem rejeitar o próprio envio**: nova regra no
-  servidor (`_impede_automoderacao`, `backend/app/routers/moderacao.py`). A
-  promessa de um moderador só pode ser publicada/rejeitada pela comunidade ou
-  por outro moderador. Coberta por 2 novos testes (47 no total, todos passando).
-- Novas decisões registradas em `Docs/Doubts.md` (itens 8 a 11): visibilidade
-  pública total da moderação, snapshot da fonte via Wayback Machine,
-  reputação progressiva pública — todas pendentes de implementação e listadas
-  em `Docs/Status.md` (anti-abuso marcado como PRIORIDADE 0).
-- Provedores definidos pelo mantenedor: **Resend** (e-mails) e **Cloudflare
-  Turnstile** (captcha). Hospedagem ainda em aberto.
+- Pesquisa do conjunto `br_camara_dados_abertos` da Base dos Dados (tabelas,
+  cobertura histórica, modelo de acesso e custos) e verificação de que **não
+  há conjunto tratado do Senado** na BD.
+- Decisão documentada em `Docs/Base-dos-Dados.md`: BD como fonte
+  **complementar** (backfill histórico + frequência em plenário); API oficial
+  da Câmara segue primária; implementação entra nas issues #8 e #23.
+- `Docs/Status.md` e `Docs/Doubts.md` (item 12) atualizados.
 
 ### 2026-08-25 — Backend: implementação inicial (do zero)
 

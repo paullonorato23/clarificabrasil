@@ -52,6 +52,13 @@ O backend portou a fórmula exata (`backend/app/score.py`) e passa a ser a
 fonte canônica quando o frontend migrar para dados reais. Versões futuras
 devem ser documentadas aqui e na rota `/metodologia`.
 
+### 12. Base dos Dados: usar ou não? — decidido (26/08/2026)
+Avaliação completa em `Docs/Base-dos-Dados.md` (issue #27). **Decisão: usar
+como fonte complementar, não primária** — backfill histórico (despesas desde
+1959, votações desde 1934) e frequência em plenário (`evento_presenca_deputado`).
+A API oficial da Câmara segue como fonte primária dos dados correntes.
+A BD **não cobre o Senado** — a API do Senado (issue #9) continua necessária.
+*(Numerada como 12 porque os itens 8–11 estão no PR #22, ainda aberto.)*
 ---
 
 ## Moderação e transparência (sessão de 25/08/2026, tarde)
