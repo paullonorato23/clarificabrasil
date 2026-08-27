@@ -10,6 +10,16 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), datas em A
 
 ## [Não lançado]
 
+### 2026-08-26 — Avaliação da Base dos Dados (issue #27)
+
+- Pesquisa do conjunto `br_camara_dados_abertos` da Base dos Dados (tabelas,
+  cobertura histórica, modelo de acesso e custos) e verificação de que **não
+  há conjunto tratado do Senado** na BD.
+- Decisão documentada em `Docs/Base-dos-Dados.md`: BD como fonte
+  **complementar** (backfill histórico + frequência em plenário); API oficial
+  da Câmara segue primária; implementação entra nas issues #8 e #23.
+- `Docs/Status.md` e `Docs/Doubts.md` (item 12) atualizados.
+
 ### 2026-08-25 — Backend: implementação inicial (do zero)
 
 **Infraestrutura do backend (`backend/`)**

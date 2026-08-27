@@ -63,7 +63,7 @@ Legenda: ✅ pronto · 🟡 parcial · ⬜ pendente
 ## 3. Integração com fontes oficiais
 - ⬜ API Dados Abertos da Câmara (deputados, proposições, votações, despesas)
 - ⬜ API do Senado Federal
-- ⬜ Base dos Dados (avaliação)
+- ✅ **Base dos Dados avaliada** (26/08): fonte **complementar** — backfill histórico e frequência em plenário; API da Câmara segue primária; Senado não é coberto pela BD. Ver `Docs/Base-dos-Dados.md`
 - ⬜ Job de sincronização periódica + cache
 
 ## 4. Inteligência (fase posterior)
