@@ -52,7 +52,41 @@ O backend portou a fórmula exata (`backend/app/score.py`) e passa a ser a
 fonte canônica quando o frontend migrar para dados reais. Versões futuras
 devem ser documentadas aqui e na rota `/metodologia`.
 
-*(Os itens 8–11 estão no PR #22 e o item 12 na branch `docs/avaliacao-base-dos-dados`, ambos aguardando merge.)*
+---
+
+## Moderação e transparência (sessão de 25/08/2026, tarde)
+
+### 8. Visibilidade total da moderação — decidido (a implementar)
+O mantenedor decidiu que a moderação deve ser **100% transparente**: qualquer
+visitante (mesmo sem login) poderá ver promessas pendentes, publicadas e
+rejeitadas **com o motivo da rejeição**. Isso muda o comportamento atual da
+API (hoje `GET /promessas/{id}` restringe pendentes/rejeitadas a autor e
+moderadores) e pede uma UX própria (abas por situação no perfil do
+parlamentar, em definição). A fila de moderação segue exigindo login para
+**agir** (validar/questionar), mas não para **ver**.
+
+### 9. Moderador não modera o próprio envio — decidido e **implementado**
+Ninguém — nem moderadores — pode aprovar/rejeitar uma promessa que enviou
+(regra `_impede_automoderacao` em `backend/app/routers/moderacao.py`,
+testes em `test_moderacao.py`). A promessa de um moderador só pode ser
+moderada pela comunidade ou por outro moderador.
+
+### 10. Snapshot da fonte — decidido (a implementar)
+Para provar que a fala existiu mesmo se a página sair do ar: arquivar a URL
+no momento do cadastro. Caminho preferido: **API do Wayback Machine**
+(`https://archive.org/wayback/available` para consultar e
+`https://web.archive.org/save/<url>` para arquivar), sem custo e sem conta.
+A UX deve esconder a complexidade: o usuário só cola o link; o sistema
+arquiva e guarda a URL do snapshot. Complemento: campo "citação literal" da
+fala, conferido pelo moderador contra o snapshot.
+
+### 11. Reputação progressiva — decidido (a especificar)
+Aprovada a ideia de contas com limites crescentes conforme histórico de
+contribuições aprovadas. A regra deve ser **pública** (página no site), como
+a metodologia do Score. Especificação fica para a fase anti-abuso
+(prioridade 0).
+
+*(O item 12 — avaliação da Base dos Dados — está no PR #35, aguardando merge.)*
 
 ---
 

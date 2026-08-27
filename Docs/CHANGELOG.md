@@ -30,6 +30,19 @@ Formato: [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/), datas em A
   passando) + smoke test manual contra a API real da Câmara.
 - A agenda periódica desta sincronização é a issue #23.
 
+### 2026-08-25 (tarde) — Moderação: regra anti-automoderação
+
+- **Moderador não pode aprovar nem rejeitar o próprio envio**: nova regra no
+  servidor (`_impede_automoderacao`, `backend/app/routers/moderacao.py`). A
+  promessa de um moderador só pode ser publicada/rejeitada pela comunidade ou
+  por outro moderador. Coberta por 2 novos testes (47 no total, todos passando).
+- Novas decisões registradas em `Docs/Doubts.md` (itens 8 a 11): visibilidade
+  pública total da moderação, snapshot da fonte via Wayback Machine,
+  reputação progressiva pública — todas pendentes de implementação e listadas
+  em `Docs/Status.md` (anti-abuso marcado como PRIORIDADE 0).
+- Provedores definidos pelo mantenedor: **Resend** (e-mails) e **Cloudflare
+  Turnstile** (captcha). Hospedagem ainda em aberto.
+
 ### 2026-08-25 — Backend: implementação inicial (do zero)
 
 **Infraestrutura do backend (`backend/`)**
