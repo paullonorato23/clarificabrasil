@@ -1,4 +1,4 @@
-# Política Transparente 🇧🇷
+# Clarifica Brasil 🇧🇷
 
 > **O que seu representante prometeu vs. o que ele realmente fez?**
 
